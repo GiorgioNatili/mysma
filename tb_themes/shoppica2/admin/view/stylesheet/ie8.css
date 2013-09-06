@@ -1,0 +1,18 @@
+/* CSS Document */
+
+#tb_cp_content_wrap {
+  border: 1px solid #ccc;
+}
+.tb_top_tabs .tb_tabs_nav li.ui-tabs-selected {
+  border-left: 1px solid #c6c6c6;
+  margin-left: -1px;
+}
+.tb_top_tabs .tb_tabs_nav li:first-child.ui-tabs-selected {
+  border-left: none;
+  margin-left: 0;
+}
+#tb_cp_navigation .ui-tabs-selected a {
+  border-bottom: 1px solid #ccc;
+  background: #e6e6e6 url(../image/selected_2.png) no-repeat center right;
+}
+

@@ -1,0 +1,19 @@
+/* CSS Document */
+
+#sm_window td.s_dummy_row {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+#sm_window .s_table thead td a {
+	height: 21px !important;
+  background: url(../image/bullet_sort.gif) no-repeat 0 6px;
+}
+#sm_window .s_table thead td a.desc {
+  background: url(../image/bullet_down.gif) no-repeat 0 6px;
+}
+#sm_window .s_table thead td a.asc {
+  background: url(../image/bullet_up.gif) no-repeat 0 6px;
+}
+#sm_window .s_table tbody tr:first-child td {
+  border-top: 1px solid #d0d0d0;
+}

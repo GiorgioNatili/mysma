@@ -1,0 +1,25 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+/* input */
+.primary-define input {
+	position: static;
+	overflow: visible;
+	vertical-align: middle;
+}
+.primary-define input[type*="radio"],
+.primary-define input[type*="checkbox"] {
+	border: none;
+	outline: none;
+	background: none;
+}
+.primary-define .tab-content {
+	width: 100%;
+}
+/* products grid */
+.primary-define table.list tbody td.quantity input {
+	vertical-align: top;
+}

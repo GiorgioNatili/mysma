@@ -1,0 +1,52 @@
+.noty_modal {
+	position: fixed;
+	z-index: 9999998;
+	top: 0;
+	left: 0;
+	width: 120%;
+	height: 120%;
+	background: #fff;
+	opacity: 0.9;
+}
+.noty_cont,
+.noty_bar
+{
+	position: fixed;
+	z-index: 9999999;
+}
+.noty_bar {
+	display: none;
+	width: 100%;
+}
+.noty_cont .noty_bar {
+	position: static;
+}
+.top {
+	top: 0;
+}
+.noty_layout_topRight {
+	top: 15px;
+	right: 15px;
+}
+.noty_layout_topLeft {
+	top: 15px;
+	left: 15px;
+}
+.noty_layout_bottomLeft {
+	bottom: 15px;
+	left: 15px;
+}
+.noty_layout_bottomRight {
+	bottom: 15px;
+	right: 15px;
+}
+
+.noty_bar.noty_layout_topRight {
+	width: 300px;
+}
+
+.noty_bar .noty_close {
+	cursor: pointer;
+}
+
+

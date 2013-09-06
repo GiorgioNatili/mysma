@@ -1,0 +1,99 @@
+span.ui-multiselect,
+span.ui-multiselect span
+{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  color: #666;
+  border: none;
+}
+span.ui-multiselect {
+  padding-left: 10px;
+  background: url(../../uniform/images/sprite.png) no-repeat -677px -138px;
+}
+span.ui-multiselect span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: url(../../uniform/images/sprite.png) no-repeat 100% -2px;
+}
+span.ui-multiselect:hover {
+  background-position: -677px -172px;
+}
+span.ui-multiselect:hover span {
+  background-position: 100% -36px;
+}
+
+.ui-multiselect .ui-icon {
+  display: none;
+}
+.ui-multiselect.ui-state-active .ui-icon {
+}
+.ui-multiselect-menu {
+  z-index: 10000;
+  position: absolute;
+  display: none;
+  margin-left: 2px;
+  background: #fff;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  box-shadow:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(0, 0, 0, 0.1);
+  -o-box-shadow:
+    0 0 1px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.ui-multiselect-menu a {
+  text-decoration: none;
+}
+.ui-multiselect-menu ul {
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ui-multiselect-menu input[type=checkbox],
+.ui-multiselect-menu input[type=radio]
+{
+  margin: 0 5px 0 0;
+  vertical-align: middle;
+}
+.ui-multiselect-menu .ui-widget-header {
+  padding: 10px;
+}
+.ui-multiselect-menu .ui-widget-header li {
+  display: inline-block;
+}
+.ui-multiselect-checkboxes {
+  clear: both;
+  overflow-y: auto !important;
+  position: relative;
+  margin: 10px !important;
+}
+.ui-multiselect-menu .ui-multiselect-optgroup-label {
+  margin: 10px 0;
+  font-family: 'PT Sans',sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff6100;
+}
+.ui-multiselect-menu .ui-multiselect-optgroup-label * {
+  color: #ff6100;
+}
+.ui-multiselect-menu ul > .ui-multiselect-optgroup-label:first-child {
+  margin-top: 0;
+}
+.ui-multiselect-menu label {
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+.ui-multiselect-single .ui-multiselect-checkboxes input { position:absolute !important; top: auto !important; left:-9999px; }

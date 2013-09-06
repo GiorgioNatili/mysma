@@ -1,0 +1,17 @@
+/*--------------------------------------------------------------------------/
+* @Author		KulerThemes.com http://www.kulerthemes.com
+* @Copyright	Copyright (C) 2012 - 2013 KulerThemes.com. All rights reserved.
+* @License		KulerThemes.com Proprietary License
+/---------------------------------------------------------------------------*/
+
+/* CAROUSEL */
+/* Colors */
+.color-teal .jcarousel-skin-opencart .jcarousel-next-horizontal:hover,
+.color-teal .jcarousel-skin-opencart .jcarousel-prev-horizontal:hover {
+	background-color: #6EC8BC;
+}
+/* SLIDESHOW */
+/* Colors */
+.color-teal .nivo-directionNav a:hover {
+	background-color: #6EC8BC;
+}
