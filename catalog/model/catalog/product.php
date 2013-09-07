@@ -273,6 +273,12 @@ LEFT JOIN ".DB_PREFIX."product_to_category as p2c ON ";
 			} else {
 				$sql .= " ORDER BY p.sort_order";	
 			}
+			
+			if ( isset($data['order']) && strtoupper($data['order']) == "ASC") {
+				$sql .= ' ASC ';
+			} else {
+				$sql .= ' DESC ';
+			}
 
 			// Max Limit
 			if ( isset($data['limit'])) {
