@@ -3,6 +3,17 @@ class ModelCatalogProduct extends Model {
 	public function updateViewed($product_id) {
 		$this->db->query("UPDATE " . DB_PREFIX . "product SET viewed = (viewed + 1) WHERE product_id = '" . (int)$product_id . "'");
 	}
+        
+        public function getProductForAPI($product_id) {
+            $sql = "SELECT DISTINCT p.product_id, p.status, p.image, pd.description, p.price, p.sku, pd.name, p2c.category_id FROM " .DB_PREFIX."product p
+                LEFT JOIN ".DB_PREFIX."product_description as pd on pd.product_id = p.product_id
+                LEFT JOIN ".DB_PREFIX. "product_to_category as p2c on p2c.product_id = p.product_id
+                WHERE p.product_id = 28
+                GROUP BY p.product_id";
+            
+            $query = $this->db->query($sql);
+            return $query->row;
+        }
 	
 	public function getProduct($product_id) {
 		if ($this->customer->isLogged()) {
@@ -224,6 +235,61 @@ class ModelCatalogProduct extends Model {
 
 		return $product_data;
 	}
+
+		public function getProductsForAPI($data = array()) {
+			if ($this->customer->isLogged()) {
+				$customer_group_id = $this->customer->getCustomerGroupId();
+			} else {
+				$customer_group_id = $this->config->get('config_customer_group_id');
+			}	
+		
+			$sql = "select DISTINCT p.product_id as id, p.status, pd.name as name, p2c.category_id, p.image from ".DB_PREFIX."product p
+LEFT JOIN ".DB_PREFIX."product_description as pd on pd.product_id = p.product_id
+LEFT JOIN ".DB_PREFIX."product_to_category as p2c ON ";
+
+			if ( isset($data['filter_category_id'] ) ) {
+				$sql .= 'p2c.category_id = '.$data['filter_category_id'];
+			} else {
+				$sql .= 'p2c.product_id = p.product_id ';
+			}
+			
+			// Sort
+			$sort_data = array(
+				'p.name',
+				'p.model',
+				'p.quantity',
+				'p.price',
+				'p.sort_order',
+				'p.date_added'
+			);	
+                        
+			if (isset($data['sort']) && in_array('p.'.$data['sort'], $sort_data)) {
+                            $padded = 'p.'.$data['sort'];
+				if ($padded == 'p.model') {
+					$sql .= " ORDER BY LCASE(" . $padded . ")";
+				} else {
+					$sql .= " ORDER BY " . $padded;
+				}
+			} else {
+				$sql .= " ORDER BY p.sort_order";	
+			}
+			
+			if ( isset($data['order']) && strtoupper($data['order']) == "ASC") {
+				$sql .= ' ASC ';
+			} else {
+				$sql .= ' DESC ';
+			}
+
+			// Max Limit
+			if ( isset($data['limit'])) {
+				$sql .= sprintf(' LIMIT %d, %d', $data['start'], $data['limit']);
+			}
+                        
+                        $products = array();
+		
+                        $query = $this->db->query($sql);
+                        return $query->rows;
+		}
 	
 	public function getProductSpecials($data = array()) {
 		if ($this->customer->isLogged()) {
@@ -577,6 +643,27 @@ class ModelCatalogProduct extends Model {
 		
 		return $query->row['total'];
 	}
+    
+    public function getProfiles($product_id) {
+        if ($this->customer->isLogged()) {
+			$customer_group_id = $this->customer->getCustomerGroupId();
+		} else {
+			$customer_group_id = $this->config->get('config_customer_group_id');
+		}		
+        
+        return $this->db->query("SELECT `pd`.* FROM `" . DB_PREFIX . "product_profile` `pp` JOIN `" . DB_PREFIX . "profile_description` `pd` ON `pd`.`language_id` = " . (int) $this->config->get('config_language_id') . " AND `pd`.`profile_id` = `pp`.`profile_id` JOIN `" . DB_PREFIX . "profile` `p` ON `p`.`profile_id` = `pd`.`profile_id` WHERE `product_id` = " . (int) $product_id . " AND `status` = 1 AND `customer_group_id` = " . (int) $customer_group_id . " ORDER BY `sort_order` ASC")->rows;
+        
+    }
+    
+    public function getProfile($product_id, $profile_id) {
+        if ($this->customer->isLogged()) {
+			$customer_group_id = $this->customer->getCustomerGroupId();
+		} else {
+			$customer_group_id = $this->config->get('config_customer_group_id');
+		}		
+        
+        return $this->db->query("SELECT * FROM `" . DB_PREFIX . "profile` `p` JOIN `" . DB_PREFIX . "product_profile` `pp` ON `pp`.`profile_id` = `p`.`profile_id` AND `pp`.`product_id` = " . (int) $product_id . " WHERE `pp`.`profile_id` = " . (int) $profile_id . " AND `status` = 1 AND `pp`.`customer_group_id` = " . (int) $customer_group_id)->row;
+    }
 			
 	public function getTotalProductSpecials() {
 		if ($this->customer->isLogged()) {
