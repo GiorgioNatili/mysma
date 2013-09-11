@@ -155,21 +155,25 @@ class ControllerFeedWebApi extends Controller {
 	private function getCategoriesTree($parent = 0, $level = 1) {
 		$this->load->model('catalog/category');
 		$this->load->model('tool/image');
+                $this->load->model('catalog/product');
 		
 		$result = array();
 
 		$categories = $this->model_catalog_category->getCategories($parent);
-
+                //echo $parent.',';
+                
 		if ($categories && $level > 0) {
 			$level--;
 
 			foreach ($categories as $category) {
 
-				if ($category['image']) {
+				/*
+                                 * if ($category['image']) {
 					$image = $this->model_tool_image->resize($category['image'], $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));
 				} else {
 					$image = false;
 				}
+                                 */
 
 				$result[] = array(
 					'category_id'   => $category['category_id'],
@@ -177,7 +181,10 @@ class ControllerFeedWebApi extends Controller {
 					'name'          => $category['name'],
 					//'image'         => $image,
 					//'href'          => $this->url->link('product/category', 'category_id=' . $category['category_id']),
-					'categories'    => $this->getCategoriesTree($category['category_id'], $level)
+					'categories'    => $this->getCategoriesTree($category['category_id'], $level),
+                                        'total_products'    => $this->model_catalog_product->getTotalProducts(array(
+                                            'filter_category_id'    => $category['category_id']
+                                        ))
 				);
 			}
 
