@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 // Version
 define('VERSION', '1.5.5.1');
 
