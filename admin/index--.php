@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.5.6');
+define('VERSION', '1.5.5.1');
 
 // Configuration
 if (file_exists('config.php')) {
@@ -13,14 +13,18 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
-// Startup
-require_once(DIR_SYSTEM . 'startup.php');
+//VirtualQMOD
+require_once('../vqmod/vqmod.php');
+$vqmod = new VQMod();
+
+// VQMODDED Startup
+require_once($vqmod->modCheck(DIR_SYSTEM . 'startup.php'));
 
 // Application Classes
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/user.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
+require_once($vqmod->modCheck(DIR_SYSTEM . 'library/currency.php'));
+require_once($vqmod->modCheck(DIR_SYSTEM . 'library/user.php'));
+require_once($vqmod->modCheck(DIR_SYSTEM . 'library/weight.php'));
+require_once($vqmod->modCheck(DIR_SYSTEM . 'library/length.php'));
 
 // Registry
 $registry = new Registry();
@@ -34,8 +38,6 @@ $config = new Config();
 $registry->set('config', $config);
 
 // Database
-
-
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 		
@@ -140,13 +142,6 @@ $registry->set('length', new Length($registry));
 
 // User
 $registry->set('user', new User($registry));
-
-//OpenBay Pro
-$registry->set('openbay', new Openbay($registry));
-$registry->set('play', new Play($registry));
-$registry->set('ebay', new Ebay($registry));
-$registry->set('amazon', new Amazon($registry));
-$registry->set('amazonus', new Amazonus($registry));
 						
 // Front Controller
 $controller = new Front($registry);

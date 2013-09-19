@@ -1,6 +1,8 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
+
+
 // Version
 define('VERSION', '1.5.5.1');
 
@@ -9,18 +11,22 @@ if (file_exists('config.php')) {
 	require_once('config.php');
 }  
 
+
 // Install 
 if (!defined('DIR_APPLICATION')) {
 	header('Location: install/index.php');
 	exit;
 }
 
+
 // VirtualQMOD
 require_once('./vqmod/vqmod.php');
 $vqmod = new VQMod();
 
+
 // VQMODDED Startup
 require_once($vqmod->modCheck(DIR_SYSTEM . 'startup.php'));
+
 
 // Application Classes
 require_once($vqmod->modCheck(DIR_SYSTEM . 'library/customer.php'));
@@ -46,6 +52,7 @@ $registry->set('config', $config);
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
+
 // Store
 if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
 	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
@@ -70,10 +77,12 @@ foreach ($query->rows as $setting) {
 	}
 }
 
+
 if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
 	$config->set('config_ssl', HTTPS_SERVER);	
 }
+
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_secure') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -135,6 +144,8 @@ $registry->set('cache', $cache);
 // Session
 $session = new Session();
 $registry->set('session', $session);
+
+
 
 // Language Detection
 $languages = array();
@@ -198,6 +209,8 @@ $registry->set('customer', new Customer($registry));
 // Affiliate
 $registry->set('affiliate', new Affiliate($registry));
 
+
+
 if (isset($request->get['tracking'])) {
 	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
 }
@@ -244,4 +257,7 @@ $controller->dispatch($action, new Action('error/not_found'));
 
 // Output
 $response->output();
+
+
+
 ?>

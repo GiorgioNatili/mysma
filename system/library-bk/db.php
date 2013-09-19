@@ -3,7 +3,6 @@ class DB {
 	private $driver;
 	
 	public function __construct($driver, $hostname, $username, $password, $database) {
-            
 		if (file_exists(DIR_DATABASE . $driver . '.php')) {
 			require_once(DIR_DATABASE . $driver . '.php');
 		} else {
