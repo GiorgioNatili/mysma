@@ -1,1 +1,0 @@
-<li><a id="tb_banners_settings_tab_anchor" title="#tb_banners_settings_tab_content" href="<?php echo $tbUrl->generate('default'); ?>"><span class="s_icon_16"><span class="s_icon s_advertising_16"></span>Banners</span></a></li>
