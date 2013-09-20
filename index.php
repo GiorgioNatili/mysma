@@ -1,4 +1,13 @@
 <?php
+
+/*
+ * Allow cross origin ajax request over the API.
+ * @author	Hamza Waqas
+ * @since	20th Sep, 2013
+ * @version	v1.0
+ */
+header('Access-Control-Allow-Origin: *');
+
 // Version
 define('VERSION', '1.5.5.1');
 
