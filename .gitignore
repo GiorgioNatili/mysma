@@ -9,3 +9,5 @@ image/cache/data/*
 system/cache
 system/logs
 nbproject
+*.iml
+client/.idea
