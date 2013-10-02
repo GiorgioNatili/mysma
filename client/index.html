@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<section id='categories'>
+
+    <header>Cateogories</header>
+
+    <label for='categories-level'>Category Level</label>
+    <input id='categories-level' type='number' value='0' min='0' step='1' pattern='\d+' />
+    <br>
+    <label for='categories-nesting'>Category Nesting</label>
+    <input id='categories-nesting' type='number' value='1' min='1' step='1' pattern='\d+' />
+
+    <br>
+
+    <button id='categories-data'>Get Data!</button>
+
+    <br>
+
+    <div id='categories-result'>
+        All the data will go beneath...
+        <ul>
+            <!-- Data here -->
+        </ul>
+    </div>
+
+</section>
+
+<hr>
+
+<section id='category'>
+
+    <header>Category</header>
+
+    <label for='category-id'>Category ID</label>
+    <input id='category-id' type='number' value='0' min='0' pattern='\d+' />
+
+    <br>
+
+    <button id='category-data'>Get Data!</button>
+
+    <br>
+
+    <div id='category-result'>
+        All the data will go beneath...
+        <ul>
+            <!-- Data here -->
+        </ul>
+    </div>
+
+</section>
+
+<hr>
+
+<section id='products'>
+
+    <header>Products</header>
+
+    <label for='category-id'>Products by Category ID</label>
+    <input id='products-category-id' type='number' value='0' min='0' pattern='\d+' />
+
+    <br>
+
+    <button id='products-category-data'>Get Data!</button>
+
+    <br>
+
+    <div id='category-products'>
+        All the data will go beneath...
+        <ul>
+            <!-- Data here -->
+        </ul>
+    </div>
+
+</section>
+
+<script data-main="js/app" src="js/libs/require/require.js"></script>
+
+</body>
+</html>
